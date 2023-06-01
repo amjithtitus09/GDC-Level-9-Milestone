@@ -187,7 +187,7 @@ class CelerySendReportsTest(TestCase):
                                              priority=1, status= "COMPLETED", user = self.user)
 
     def test_get(self):
-        self.user.send_report_at=datetime.datetime.today() - datetime.timedelta(days = 1)
+        self.user.send_report_at=datetime.datetime.today()
         self.user.save()
         before_count = User.objects.filter(send_report_at__isnull=False, send_report_at__lte=datetime.datetime.now().time()).filter(Q(last_sent_on__isnull=True) | Q(last_sent_on__lt=datetime.datetime.today())).count()
         send_reports()
